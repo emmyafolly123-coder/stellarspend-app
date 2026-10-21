@@ -92,6 +92,16 @@ function loadNotifications(): Notification[] {
   }
 }
 
+/**
+ * Loads the user's notification preferences from localStorage.
+ *
+ * Returns the stored preferences when available and parsable.
+ * If running outside the browser, no saved preferences exist, or
+ * parsing fails, it falls back to enabling all notification types.
+ *
+ * @returns The resolved notification preferences with `success`, `error`,
+ *   and `info` flags.
+ */
 function loadPreferences(): NotificationPreferences {
   if (typeof window === "undefined") {
     return {
