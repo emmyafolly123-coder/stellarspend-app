@@ -8,8 +8,28 @@ import React, {
   useCallback,
 } from "react";
 
+/**
+ * Represents the severity/category of a notification.
+ *
+ * @remarks
+ * Used to determine the visual style of a toast or notification entry,
+ * and to filter which types appear based on user preferences.
+ *
+ * - `"success"` — an operation completed successfully.
+ * - `"error"` — an operation failed or an error occurred.
+ * - `"info"` — a neutral informational message.
+ */
 export type NotificationType = "success" | "error" | "info";
 
+/**
+ * Represents a single in-app notification.
+ *
+ * @property id - Unique identifier for the notification (random alphanumeric string).
+ * @property type - The severity/category of the notification; controls styling and filtering.
+ * @property message - Human-readable description of the event that triggered the notification.
+ * @property timestamp - Unix timestamp (ms) recording when the notification was created.
+ * @property read - Whether the user has acknowledged/read the notification.
+ */
 export interface Notification {
   id: string;
   type: NotificationType;
@@ -23,21 +43,6 @@ export interface NotificationPreferences {
   error: boolean;
   info: boolean;
 }
-
-interface NotificationContextType {
-  notifications: Notification[];
-  toasts: Notification[];
-  addNotification: (type: NotificationType, message: string) => void;
-  markAsRead: (id: string) => void;
-  markAllAsRead: () => void;
-  removeNotification: (id: string) => void;
-  removeToast: (id: string) => void;
-  clearAll: () => void;
-  preferences: NotificationPreferences;
-  updatePreferences: (prefs: Partial<NotificationPreferences>) => void;
-}
-
-
 
 interface NotificationContextType {
   notifications: Notification[];
